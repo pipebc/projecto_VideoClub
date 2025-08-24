@@ -9,7 +9,7 @@ public class Cliente {
     private boolean activo;
     private List<Arriendo> arriendos; 
     
-    public Cliente(String idCliente, String nombre, String apellido, String telefono, String email, String premium) {
+    public Cliente(String idCliente, String nombre, String apellido, String telefono, String email) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -96,6 +96,7 @@ public class Cliente {
     }
     
 }
+
 
 
 
