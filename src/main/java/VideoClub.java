@@ -2,25 +2,18 @@ import java.io.*;
 import java.util.*;
 
 public class VideoClub {
-    private Cliente[] clientes;
-    private Pelicula[] peliculas;
-    private Arriendo[] arriendos;
-    private int numClientes;
-    private int numPeliculas;
-    private int numArriendos;
+    private List<Cliente> clientes;
+    private List<Pelicula> peliculas;
+    private List<Arriendo> arriendos;
     
-
     private HashMap<String, Double> multasClientes;
     
     public VideoClub() {
-        clientes = new Cliente[50];
-        peliculas = new Pelicula[50];
-        arriendos = new Arriendo[100];
-        numClientes = 0;
-        numPeliculas = 0;
-        numArriendos = 0;
+        clientes = new ArrayList<>();
+        peliculas = new ArrayList<>();
+        arriendos = new ArrayList<>();
         
-        this.multasClientes = new HashMap<String, Double>();
+        multasClientes = new HashMap<String, Double>();
         cargarDatosIniciales();
     }
 
@@ -55,66 +48,55 @@ public class VideoClub {
     }
 
     public void agregarCliente(Cliente cliente) {
-        if (numClientes < clientes.length) {
-            clientes[numClientes] = cliente;
-            numClientes++;
-        }
+        clientes.add(cliente);
     }
 
     public void agregarPelicula(Pelicula pelicula) {
-        if (numPeliculas < peliculas.length) {
-            peliculas[numPeliculas] = pelicula;
-            numPeliculas++;
-        }
+        peliculas.add(pelicula);
     }
 
     public void agregarArriendo(Arriendo arriendo) {
-        if (numArriendos < arriendos.length) {
-            arriendos[numArriendos] = arriendo;
-            numArriendos++;
-        }
+        arriendos.add(arriendo);
     }
 
     public Cliente buscarCliente(String id) {
-        for (int i = 0; i < numClientes; i++) {
-            if (clientes[i].getIdCliente().equals(id)) {
-                return clientes[i];
+        for (Cliente cliente : clientes) {
+            if (cliente.getIdCliente().equals(id)) {
+                return cliente;
             }
         }
         return null;
     }
 
     public Pelicula buscarPelicula(String idPelicula) {
-        for (int i = 0; i < numPeliculas; i++) {
-            if (peliculas[i].getIdPelicula().equals(idPelicula)) {
-                return peliculas[i];
+        for (Pelicula pelicula : peliculas) {
+            if (pelicula.getIdPelicula().equals(idPelicula)) {
+                return pelicula;
             }
         }
         return null;
     }
     
     public Pelicula buscarPelicula(String titulo, boolean porTitulo) {
-        for (int i = 0; i < numPeliculas; i++) {
-            if (peliculas[i].getTitulo().equalsIgnoreCase(titulo)) {
-                return peliculas[i];
+        for (Pelicula pelicula : peliculas) {
+            if (pelicula.getTitulo().equalsIgnoreCase(titulo)) {
+                return pelicula;
             }
         }
         return null;
     }
     
-    public Pelicula[] buscarPeliculas(String genero, int limite) {
-        Pelicula[] resultado = new Pelicula[limite];
-        int count = 0;
-        
-        for (int i = 0; i < numPeliculas && count < limite; i++) {
-            if (peliculas[i].getGenero().equalsIgnoreCase(genero)) {
-                resultado[count] = peliculas[i];
-                count++;
+    public List<Pelicula> buscarPeliculas(String genero, int limite) {
+        List<Pelicula> resultado = new ArrayList<>();
+        for (Pelicula pelicula : peliculas) {
+            if (pelicula.getGenero().equalsIgnoreCase(genero)) {
+                resultado.add(pelicula);
+                if (resultado.size() >= limite) break;
             }
         }
-        return Arrays.copyOf(resultado, count);
+        return resultado;
     }
-    
+
     public void agregarMulta(String idCliente, double monto) {
         if (multasClientes.containsKey(idCliente)) {
             // Si ya tiene multa, sumar al monto existente
@@ -174,8 +156,8 @@ public class VideoClub {
     public static void main(String[] args) throws IOException {
         VideoClub videoClub = new VideoClub();
         System.out.println("Datos iniciales cargados correctamente!");
-        System.out.println("Clientes: " + videoClub.numClientes);
-        System.out.println("Películas: " + videoClub.numPeliculas);
-        System.out.println("Arriendos: " + videoClub.numArriendos);
+        System.out.println("Clientes: " + videoClub.clientes.size());
+        System.out.println("Películas: " + videoClub.peliculas.size());
+        System.out.println("Arriendos: " + videoClub.arriendos.size());
     }
 }
