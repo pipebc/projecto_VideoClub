@@ -18,9 +18,9 @@ public class VideoClub {
     }
 
     private void cargarDatosIniciales() {
-        agregarCliente(new Cliente("CLI-001", "Juan", "Pérez", "+56912345678", "juan@email.com", "premium"));
-        agregarCliente(new Cliente("CLI-002", "María", "González", "+56987654321", "maria@email.com", "regular"));
-        agregarCliente(new Cliente("CLI-003", "Carlos", "López", "+56955555555", "carlos@email.com", "regular"));
+        agregarCliente(new Cliente("CLI-001", "Juan", "Pérez", "+56912345678", "juan@email.com"));
+        agregarCliente(new Cliente("CLI-002", "María", "González", "+56987654321", "maria@email.com"));
+        agregarCliente(new Cliente("CLI-003", "Carlos", "López", "+56955555555", "carlos@email.com"));
 
         agregarPelicula(new Pelicula("PEL-001", "El Padrino", "Drama", "Francis Ford Coppola", 5, "R"));
         agregarPelicula(new Pelicula("PEL-002", "Toy Story", "Animación", "John Lasseter", 3, "G"));
@@ -161,3 +161,4 @@ public class VideoClub {
         System.out.println("Arriendos: " + videoClub.arriendos.size());
     }
 }
+
