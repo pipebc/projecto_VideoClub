@@ -1,27 +1,88 @@
-public class Arriendos{
-    private String sugerencias;
-    private String Pelicula;
-    private String FechaArriendo;
-    private String FechaDevolucion;
-    private String TEST;
-    private String TESTTTTT;
-   
-    public Arriendos (String sugerencias, String Pelicula, String FechaArriendo, String FechaDevolucion){
-        this.sugerencias = sugerencias;
-        this.Pelicula = Pelicula;
-        this.FechaArriendo = FechaArriendo;
-        this.FechaDevolucion = FechaDevolucion;
+public class Arriendo {
+    private String idArriendo;
+    private Cliente cliente;
+    private Pelicula pelicula;
+    private String fechaArriendo;
+    private String fechaDevolucion;
+    private boolean devuelto;
+    private double multa;
+    private int calificacion; 
+
+    public Arriendo(String idArriendo, Cliente cliente, Pelicula pelicula, String fechaArriendo) {
+        this.idArriendo = idArriendo;
+        this.cliente = cliente;
+        this.pelicula = pelicula;
+        this.fechaArriendo = fechaArriendo;
+        this.devuelto = false;
+        this.multa = 0.0;
+        this.calificacion = 0;
     }
-    public String getsugerencias(){
-        return sugerencias;
+
+    public String getIdArriendo() {
+        return idArriendo;
     }
-    public String getPelicula(){
-        return Pelicula;
+
+    public void setIdArriendo(String idArriendo) {
+        this.idArriendo = idArriendo;
     }
-    public String getFechaArriendo(){
-        return FechaArriendo;
+
+    public Cliente getCliente() {
+        return cliente;
     }
-    public String getFechaDevolucion(){
-        return FechaDevolucion;
-    }          
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Pelicula getPelicula() {
+        return pelicula;
+    }
+
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
+    }
+
+    public String getFechaArriendo() {
+        return fechaArriendo;
+    }
+
+    public void setFechaArriendo(String fechaArriendo) {
+        this.fechaArriendo = fechaArriendo;
+    }
+
+    public String getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public void setFechaDevolucion(String fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
+    }
+
+    public boolean isDevuelto() {
+        return devuelto;
+    }
+
+    public void setDevuelto(boolean devuelto) {
+        this.devuelto = devuelto;
+    }
+
+    public double getMulta() {
+        return multa;
+    }
+
+    public void setMulta(double multa) {
+        this.multa = multa;
+    }
+
+    public int getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
+    }
+
+    public void calcularMulta(int diasRetraso) {
+        this.multa = diasRetraso * 1000; 
+    }
 }
