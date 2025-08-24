@@ -1,5 +1,4 @@
 public class Cliente {
-    // Atributos privados (SIA1.3)
     private String idCliente;
     private String nombre;
     private String apellido;
@@ -111,5 +110,6 @@ public class Cliente {
     }
     
 }
+
 
 
