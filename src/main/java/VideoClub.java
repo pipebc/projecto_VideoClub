@@ -25,8 +25,8 @@ public class VideoClub {
         agregarPelicula(new Pelicula("PEL-001", "El Padrino", "Drama", "Francis Ford Coppola", 5));
         agregarPelicula(new Pelicula("PEL-002", "Toy Story", "Animación", "John Lasseter", 3));
         agregarPelicula(new Pelicula("PEL-003", "Matrix", "Ciencia Ficción", "Lana Wachowski", 4));
-        agregarPelicula(new Pelicula("PEL-004", "Forrest Gump", "Drama", "Robert Zemeckis", 2, ));
-        agregarPelicula(new Pelicula("PEL-005", "Jurassic Park", "Aventura", "Steven Spielberg", 3,));
+        agregarPelicula(new Pelicula("PEL-004", "Forrest Gump", "Drama", "Robert Zemeckis", 2));
+        agregarPelicula(new Pelicula("PEL-005", "Jurassic Park", "Aventura", "Steven Spielberg", 3));
 
         Cliente cliente1 = buscarCliente("CLI-001");
         Pelicula pelicula1 = buscarPelicula("PEL-001");
@@ -161,5 +161,6 @@ public class VideoClub {
         System.out.println("Arriendos: " + videoClub.arriendos.size());
     }
 }
+
 
 
