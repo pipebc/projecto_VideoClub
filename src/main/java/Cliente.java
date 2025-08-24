@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Cliente {
     private String idCliente;
     private String nombre;
@@ -5,26 +7,23 @@ public class Cliente {
     private String telefono;
     private String email;
     private boolean activo;
-    private Arriendo[] arriendos; 
-    private int numArriendos;
+    private List<Arriendo> arriendos; 
     
-    public Cliente(String idCliente, String nombre, String apellido, String telefono, 
-                  String email, String tipoMembresia) {
+    public Cliente(String idCliente, String nombre, String apellido, String telefono, String email, String premium) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
         this.activo = true;
-        this.arriendos = new Arriendo[100]; 
-        this.numArriendos = 0;
+        this.arriendos = new ArrayList<>(); 
     }
     
 
-    public Arriendo[] getArriendosActivos() {
-        Arriendo[] activos = new Arriendo[numArriendos];
-        for (int i = 0; i < numArriendos; i++) {
-            activos[i] = arriendos[i];
+    public List<Arriendo> getArriendosActivos() {
+        List<Arriendo> activos = new ArrayList<>();
+        for (Arriendo a : arriendos) {
+            activos.add(a);
         }
         return activos;
     }
@@ -77,27 +76,14 @@ public class Cliente {
         this.activo = activo;
     }
 
-    public Arriendo[] getArriendos() {
+    public List<Arriendo> getArriendos() {
         return arriendos;
     }
 
-    public void setArriendos(Arriendo[] arriendos) {
-        this.arriendos = arriendos;
-    }
-    
-    public int getNumArriendos() {
-        return numArriendos;
+    public boolean agregarArriendo(Arriendo arriendo) {
+        return arriendos.add(arriendo);
     }
 
-    public boolean agregarArriendo(Arriendo arriendo) {
-        if (numArriendos < arriendos.length) {
-            arriendos[numArriendos] = arriendo;
-            numArriendos++;
-            return true;
-        }
-        return false;
-    }
-    
     public void actualizarContacto(String nuevoTelefono) {
         this.telefono = nuevoTelefono;
         System.out.println("Teléfono actualizado: " + nuevoTelefono);
