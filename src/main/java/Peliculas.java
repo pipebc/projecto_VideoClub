@@ -1,37 +1,80 @@
-public class Peliculas{
-    private int idPelicula;
-    private String Titulo;
-    private String Genero;
-    private int Stock;
-    
-    public Peliculas (int idPelicula, String Titulo, String Genero, int Stock){
+public class Pelicula {
+    private String idPelicula;
+    private String titulo;
+    private String genero;
+    private String director;
+    private int stock;
+    private int vecesArrendada;
+
+    public Pelicula(String idPelicula, String titulo, String genero, String director, 
+                   int stock, String clasificacion) {
         this.idPelicula = idPelicula;
-        this.Titulo = Titulo;
-        this.Genero = Genero;
-        this.Stock = Stock;
+        this.titulo = titulo;
+        this.genero = genero;
+        this.director = director;
+        this.stock = stock;
+        this.vecesArrendada = 0;
     }
-    
-    public int getidPelicula(){
+
+    public String getIdPelicula() {
         return idPelicula;
     }
-    public String getTitulo(){
-        return Titulo;
+
+    public void setIdPelicula(String idPelicula) {
+        this.idPelicula = idPelicula;
     }
-    public String getGenero(){
-        return Genero;
+
+    public String getTitulo() {
+        return titulo;
     }
-    public int getStock(){
-        return Stock;
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
-    public void dismunuirStock(){
-        if (Stock > 0){
-            Stock--;
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getVecesArrendada() {
+        return vecesArrendada;
+    }
+
+    public void setVecesArrendada(int vecesArrendada) {
+        this.vecesArrendada = vecesArrendada;
+    }
+
+
+    public boolean arrendar() {
+        if (stock > 0) {
+            stock--;
+            vecesArrendada++;
+            return true;
         }
+        return false;
     }
-    public void aumentarStock(){
-        if (Stock < 0){
-            Stock++;
-        }
+
+    public void devolver() {
+        stock++;
     }
 }
-
