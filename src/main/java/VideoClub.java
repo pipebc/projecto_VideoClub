@@ -22,11 +22,11 @@ public class VideoClub {
         agregarCliente(new Cliente("CLI-002", "María", "González", "+56987654321", "maria@email.com"));
         agregarCliente(new Cliente("CLI-003", "Carlos", "López", "+56955555555", "carlos@email.com"));
 
-        agregarPelicula(new Pelicula("PEL-001", "El Padrino", "Drama", "Francis Ford Coppola", 5));
-        agregarPelicula(new Pelicula("PEL-002", "Toy Story", "Animación", "John Lasseter", 3));
-        agregarPelicula(new Pelicula("PEL-003", "Matrix", "Ciencia Ficción", "Lana Wachowski", 4));
-        agregarPelicula(new Pelicula("PEL-004", "Forrest Gump", "Drama", "Robert Zemeckis", 2));
-        agregarPelicula(new Pelicula("PEL-005", "Jurassic Park", "Aventura", "Steven Spielberg", 3));
+        agregarPelicula(new Pelicula("PEL-001", "El Padrino", "Drama", "Francis Ford Coppola", 5, "R"));
+        agregarPelicula(new Pelicula("PEL-002", "Toy Story", "Animación", "John Lasseter", 3, "G"));
+        agregarPelicula(new Pelicula("PEL-003", "Matrix", "Ciencia Ficción", "Lana Wachowski", 4, "PG-13"));
+        agregarPelicula(new Pelicula("PEL-004", "Forrest Gump", "Drama", "Robert Zemeckis", 2, "PG-13"));
+        agregarPelicula(new Pelicula("PEL-005", "Jurassic Park", "Aventura", "Steven Spielberg", 3, "PG-13"));
 
         Cliente cliente1 = buscarCliente("CLI-001");
         Pelicula pelicula1 = buscarPelicula("PEL-001");
@@ -57,6 +57,18 @@ public class VideoClub {
 
     public void agregarArriendo(Arriendo arriendo) {
         arriendos.add(arriendo);
+    }
+
+    public List<Cliente> getClientes() {
+        return Collections.unmodifiableList(clientes);
+    }
+
+    public List<Pelicula> getPeliculas() {
+        return Collections.unmodifiableList(peliculas);
+    }
+
+    public List<Arriendo> getArriendos() {
+        return Collections.unmodifiableList(arriendos);
     }
 
     public Cliente buscarCliente(String id) {
@@ -97,61 +109,68 @@ public class VideoClub {
         return resultado;
     }
 
-    public void agregarMulta(String idCliente, double monto) {
-        if (multasClientes.containsKey(idCliente)) {
-            // Si ya tiene multa, sumar al monto existente
-            double multaActual = multasClientes.get(idCliente);
-            multasClientes.put(idCliente, multaActual + monto);
-        } else {
-            // Si no tiene multa, crear nueva entrada
-            multasClientes.put(idCliente, monto);
-        }
-        System.out.println("Multa de $" + monto + " agregada al cliente " + idCliente);
-    }
-    
-    public double consultarMulta(String idCliente) {
-        return multasClientes.getOrDefault(idCliente, 0.0);
-    }
-    
-    public void pagarMulta(String idCliente, double monto) {
-        if (multasClientes.containsKey(idCliente)) {
-            double multaActual = multasClientes.get(idCliente);
-            if (monto >= multaActual) {
-                multasClientes.remove(idCliente);
-                System.out.println("Multa pagada completamente. Gracias!");
-            } else {
-                multasClientes.put(idCliente, multaActual - monto);
-                System.out.println("Se abonaron $" + monto + ". Saldo pendiente: $" + (multaActual - monto));
-            }
-        } else {
-            System.out.println("El cliente no tiene multas pendientes");
-        }
-    }
-    
-    public void mostrarTodasMultas() {
-        System.out.println("\n=== MULTAS PENDIENTES ===");
-        if (multasClientes.isEmpty()) {
-            System.out.println("No hay multas pendientes");
-        } else {
-            for (Map.Entry<String, Double> entry : multasClientes.entrySet()) {
-                System.out.println("Cliente: " + entry.getKey() + " - Multa: $" + entry.getValue());
-            }
-        }
-    }
-    
-    public boolean puedeArrendar(String idCliente) {
-        double multa = consultarMulta(idCliente);
-        if (multa > 0) {
-            System.out.println("Cliente tiene multa pendiente de $" + multa);
+    public boolean eliminarCliente(String idCliente) {
+        Cliente c = buscarCliente(idCliente);
+        if (c == null) {
+            System.out.println("Cliente no encontrado");
             return false;
         }
         
-        Cliente cliente = buscarCliente(idCliente);
-        if(cliente != null && cliente.isActivo()) {
-            return true;
+        if (!c.getArriendos().isEmpty()) {
+            System.out.println("No se puede eliminar: el cliente tiene arriendos asociados");
+            return false;
         }
-        return false;
+        boolean ok = clientes.remove(c);
+        if (ok) {
+            multasClientes.remove(idCliente);
+            System.out.println("Cliente eliminado: " + idCliente);
+        }
+        return ok;
     }
+
+    public boolean eliminarPelicula(String idPelicula) {
+        Pelicula p = buscarPelicula(idPelicula);
+        if (p == null) {
+            System.out.println("Película no encontrada");
+            return false;
+        }
+        
+        for (Arriendo a : arriendos) {
+            if (a.getPelicula() != null && idPelicula.equals(a.getPelicula().getIdPelicula()) && !a.isDevuelto()) {
+                System.out.println("No se puede eliminar: hay arriendos no devueltos de esta película");
+                return false;
+            }
+        }
+        boolean ok = peliculas.remove(p);
+        if (ok) System.out.println("Película eliminada: " + idPelicula);
+        return ok;
+    }
+
+    public boolean eliminarArriendo(String idArriendo) {
+        Arriendo target = null;
+        for (Arriendo a : arriendos) {
+            if (a.getIdArriendo().equals(idArriendo)) {
+                target = a;
+                break;
+            }
+        }
+        if (target == null) {
+            System.out.println("Arriendo no encontrado");
+            return false;
+        }
+        
+        if (!target.isDevuelto() && target.getPelicula() != null) {
+            target.getPelicula().devolver();
+        }
+        
+        if (target.getCliente() != null) {
+            target.getCliente().eliminarArriendoPorId(idArriendo);
+        }
+        boolean ok = arriendos.remove(target);
+        if (ok) System.out.println("Arriendo eliminado: " + idArriendo);
+        return ok;
+    }
+    
     
     public static void main(String[] args) throws IOException {
         VideoClub videoClub = new VideoClub();
@@ -161,6 +180,3 @@ public class VideoClub {
         System.out.println("Arriendos: " + videoClub.arriendos.size());
     }
 }
-
-
-
