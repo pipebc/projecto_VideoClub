@@ -18,7 +18,6 @@ public class Cliente {
         this.activo = true;
         this.arriendos = new ArrayList<>(); 
     }
-    
 
     public List<Arriendo> getArriendosActivos() {
         List<Arriendo> activos = new ArrayList<>();
@@ -84,6 +83,18 @@ public class Cliente {
         return arriendos.add(arriendo);
     }
 
+    public boolean eliminarArriendoPorId(String idArriendo) {
+        Iterator<Arriendo> it = arriendos.iterator();
+        while (it.hasNext()) {
+            Arriendo a = it.next();
+            if (a.getIdArriendo().equals(idArriendo)) {
+                it.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void actualizarContacto(String nuevoTelefono) {
         this.telefono = nuevoTelefono;
         System.out.println("Teléfono actualizado: " + nuevoTelefono);
@@ -96,7 +107,6 @@ public class Cliente {
     }
     
 }
-
 
 
 
