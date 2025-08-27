@@ -5,7 +5,6 @@ public class Arriendo {
     private String fechaArriendo;
     private String fechaDevolucion;
     private boolean devuelto;
-    private double multa;
     private int calificacion; 
 
     public Arriendo(String idArriendo, Cliente cliente, Pelicula pelicula, String fechaArriendo) {
@@ -14,7 +13,6 @@ public class Arriendo {
         this.pelicula = pelicula;
         this.fechaArriendo = fechaArriendo;
         this.devuelto = false;
-        this.multa = 0.0;
         this.calificacion = 0;
     }
 
@@ -66,23 +64,11 @@ public class Arriendo {
         this.devuelto = devuelto;
     }
 
-    public double getMulta() {
-        return multa;
-    }
-
-    public void setMulta(double multa) {
-        this.multa = multa;
-    }
-
     public int getCalificacion() {
         return calificacion;
     }
 
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
-    }
-
-    public void calcularMulta(int diasRetraso) {
-        this.multa = diasRetraso * 1000; 
     }
 }
