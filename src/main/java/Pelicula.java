@@ -16,6 +16,7 @@ public class Pelicula {
         this.vecesArrendada = 0;
     }
 
+
     public String getIdPelicula() {
         return idPelicula;
     }
