@@ -14,36 +14,44 @@ public class VideoClub {
         arriendos = new ArrayList<>();
         
         multasClientes = new HashMap<String, Double>();
-        cargarDatosIniciales();
+        cargarPeliculasDesdeArchivo("src/100peliculas.txt");
     }
 
-    private void cargarDatosIniciales() {
-        agregarCliente(new Cliente("CLI-001", "Juan", "Pérez", "+56912345678", "juan@email.com"));
-        agregarCliente(new Cliente("CLI-002", "María", "González", "+56987654321", "maria@email.com"));
-        agregarCliente(new Cliente("CLI-003", "Carlos", "López", "+56955555555", "carlos@email.com"));
+    private void cargarPeliculasDesdeArchivo(String rutaArchivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(";");
+                if (datos.length == 5) {
+                    String id = datos[0].trim();
+                    String titulo = datos[1].trim();
+                    String genero = datos[2].trim();
+                    String director = datos[3].trim();
+                    int stock = Integer.parseInt(datos[4].trim());
 
-        agregarPelicula(new Pelicula("PEL-001", "El Padrino", "Drama", "Francis Ford Coppola", 5, "R"));
-        agregarPelicula(new Pelicula("PEL-002", "Toy Story", "Animación", "John Lasseter", 3, "G"));
-        agregarPelicula(new Pelicula("PEL-003", "Matrix", "Ciencia Ficción", "Lana Wachowski", 4, "PG-13"));
-        agregarPelicula(new Pelicula("PEL-004", "Forrest Gump", "Drama", "Robert Zemeckis", 2, "PG-13"));
-        agregarPelicula(new Pelicula("PEL-005", "Jurassic Park", "Aventura", "Steven Spielberg", 3, "PG-13"));
-
-        Cliente cliente1 = buscarCliente("CLI-001");
-        Pelicula pelicula1 = buscarPelicula("PEL-001");
-        Pelicula pelicula2 = buscarPelicula("PEL-003");
-
-        if (cliente1 != null && pelicula1 != null) {
-            Arriendo arriendo1 = new Arriendo("ARR-001", cliente1, pelicula1, "2024-05-01");
-            pelicula1.arrendar();
-            agregarArriendo(arriendo1);
-            cliente1.agregarArriendo(arriendo1); 
+                    Pelicula pelicula = new Pelicula(id, titulo, genero, director, stock, "PG-13");
+                    peliculas.add(pelicula);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer archivo: " + e.getMessage());
         }
+    }
 
-        if (cliente1 != null && pelicula2 != null) {
-            Arriendo arriendo2 = new Arriendo("ARR-002", cliente1, pelicula2, "2024-05-05");
-            pelicula2.arrendar();
-            agregarArriendo(arriendo2);
-            cliente1.agregarArriendo(arriendo2); 
+    private void guardarPeliculasEnArchivo(String rutaArchivo) {
+    try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaArchivo))) {
+        for (Pelicula pelicula : peliculas) {
+            String linea = pelicula.getIdPelicula() + ";" +
+                           pelicula.getTitulo() + ";" +
+                           pelicula.getGenero() + ";" +
+                           pelicula.getDirector() + ";" +
+                           pelicula.getStock();
+            bw.write(linea);
+            bw.newLine();
+        }
+        System.out.println("Archivo actualizado correctamente!");
+    } catch (IOException e) {
+        System.out.println("Error al guardar en archivo: " + e.getMessage());
         }
     }
 
@@ -53,6 +61,8 @@ public class VideoClub {
 
     public void agregarPelicula(Pelicula pelicula) {
         peliculas.add(pelicula);
+        guardarPeliculasEnArchivo("src/100peliculas.txt");
+        
     }
 
     public void agregarArriendo(Arriendo arriendo) {
@@ -128,22 +138,21 @@ public class VideoClub {
         return ok;
     }
 
-    public boolean eliminarPelicula(String idPelicula) {
-        Pelicula p = buscarPelicula(idPelicula);
-        if (p == null) {
-            System.out.println("Película no encontrada");
-            return false;
-        }
-        
-        for (Arriendo a : arriendos) {
-            if (a.getPelicula() != null && idPelicula.equals(a.getPelicula().getIdPelicula()) && !a.isDevuelto()) {
-                System.out.println("No se puede eliminar: hay arriendos no devueltos de esta película");
-                return false;
+    public void eliminarPelicula(String idPelicula) {
+        Pelicula encontrada = null;
+        for (Pelicula p : peliculas) {
+            if (p.getIdPelicula().equalsIgnoreCase(idPelicula)) {
+                encontrada = p;
+                break;
             }
         }
-        boolean ok = peliculas.remove(p);
-        if (ok) System.out.println("Película eliminada: " + idPelicula);
-        return ok;
+        if (encontrada != null) {
+            peliculas.remove(encontrada);
+            guardarPeliculasEnArchivo("src/100peliculas.txt");
+            System.out.println("Película eliminada correctamente!");
+        }   else  {
+            System.out.println("No se encontró una película con ese ID.");
+        }
     }
 
     public boolean eliminarArriendo(String idArriendo) {
