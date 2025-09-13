@@ -1,0 +1,100 @@
+PEL-001;El Padrino;Animación;Steven Spielberg;4
+PEL-002;Titanic;Ciencia Ficción;Robert Zemeckis;3
+PEL-003;Interestelar;Ciencia Ficción;Christopher Nolan;3
+PEL-004;Matrix;Suspenso;Todd Phillips;8
+PEL-005;Toy Story;Ciencia Ficción;Todd Phillips;9
+PEL-006;La vida es bella;Acción;Ridley Scott;3
+PEL-007;Gladiador;Suspenso;Robert Zemeckis;2
+PEL-008;El Señor de los Anillos;Animación;James Cameron;2
+PEL-009;Avatar;Drama;Peter Jackson;10
+PEL-010;Joker;Fantasía;Todd Phillips;7
+PEL-011;Forrest Gump;Drama;Ridley Scott;10
+PEL-012;Jurassic Park;Romance;Ridley Scott;6
+PEL-013;Avengers;Fantasía;Francis Ford Coppola;2
+PEL-014;Iron Man;Aventura;Steven Spielberg;1
+PEL-015;Spider-Man;Romance;James Cameron;6
+PEL-016;Batman: El caballero de la noche;Aventura;Todd Phillips;5
+PEL-017;Inception;Fantasía;Disney;3
+PEL-018;Coco;Romance;Christopher Nolan;8
+PEL-019;Frozen;Acción;Ridley Scott;9
+PEL-020;Rapunzel;Drama;Disney;6
+PEL-021;Up;Aventura;Robert Zemeckis;6
+PEL-022;Wall-E;Aventura;Martin Scorsese;10
+PEL-023;Soul;Acción;John Lasseter;6
+PEL-024;Cars;Ciencia Ficción;Ridley Scott;3
+PEL-025;Ratatouille;Acción;James Cameron;4
+PEL-026;Monsters Inc;Suspenso;James Cameron;5
+PEL-027;Buscando a Nemo;Drama;Steven Spielberg;6
+PEL-028;Shrek;Romance;Christopher Nolan;6
+PEL-029;Shrek 2;Animación;Pixar Studios;5
+PEL-030;Kung Fu Panda;Aventura;Disney;3
+PEL-031;Los Increíbles;Animación;Disney;4
+PEL-032;Zootopia;Acción;Francis Ford Coppola;10
+PEL-033;Moana;Aventura;Christopher Nolan;9
+PEL-034;Encanto;Romance;Pixar Studios;5
+PEL-035;Turning Red;Suspenso;John Lasseter;10
+PEL-036;Pulp Fiction;Ciencia Ficción;Martin Scorsese;4
+PEL-037;Kill Bill;Animación;Ridley Scott;8
+PEL-038;Reservoir Dogs;Aventura;Quentin Tarantino;1
+PEL-039;Django;Acción;John Lasseter;10
+PEL-040;Bastardos sin gloria;Acción;Martin Scorsese;8
+PEL-041;Star Wars IV;Aventura;Steven Spielberg;2
+PEL-042;Star Wars V;Ciencia Ficción;Christopher Nolan;3
+PEL-043;Star Wars VI;Aventura;Robert Zemeckis;7
+PEL-044;Star Wars VII;Drama;Quentin Tarantino;5
+PEL-045;Star Wars VIII;Suspenso;Ridley Scott;1
+PEL-046;Star Wars IX;Romance;Francis Ford Coppola;9
+PEL-047;Rogue One;Animación;John Lasseter;7
+PEL-048;Han Solo;Acción;Disney;1
+PEL-049;Oblivion;Drama;Disney;4
+PEL-050;Tron Legacy;Fantasía;Pixar Studios;5
+PEL-051;El Rey León;Animación;Martin Scorsese;2
+PEL-052;Aladdin;Romance;Pixar Studios;10
+PEL-053;La Sirenita;Drama;Disney;7
+PEL-054;Mulan;Animación;Pixar Studios;3
+PEL-055;Hércules;Animación;Steven Spielberg;7
+PEL-056;Tarzán;Suspenso;Todd Phillips;8
+PEL-057;Pocahontas;Aventura;Robert Zemeckis;8
+PEL-058;Blancanieves;Animación;Martin Scorsese;2
+PEL-059;Cenicienta;Animación;James Cameron;2
+PEL-060;Bella Durmiente;Animación;Pixar Studios;7
+PEL-061;Mulholland Drive;Drama;Ridley Scott;3
+PEL-062;El Gran Lebowski;Animación;Steven Spielberg;4
+PEL-063;El Club de la Pelea;Acción;Steven Spielberg;8
+PEL-064;Se7en;Acción;Pixar Studios;4
+PEL-065;Zodiac;Fantasía;Francis Ford Coppola;4
+PEL-066;La La Land;Ciencia Ficción;Martin Scorsese;9
+PEL-067;Whiplash;Aventura;Steven Spielberg;9
+PEL-068;El pianista;Fantasía;Robert Zemeckis;10
+PEL-069;La lista de Schindler;Animación;Martin Scorsese;8
+PEL-070;El niño con el pijama de rayas;Suspenso;Todd Phillips;8
+PEL-071;Harry Potter 1;Aventura;Francis Ford Coppola;6
+PEL-072;Harry Potter 2;Aventura;Martin Scorsese;5
+PEL-073;Harry Potter 3;Romance;James Cameron;6
+PEL-074;Harry Potter 4;Drama;Disney;4
+PEL-075;Harry Potter 5;Romance;Steven Spielberg;9
+PEL-076;Harry Potter 6;Drama;James Cameron;4
+PEL-077;Harry Potter 7;Acción;Christopher Nolan;3
+PEL-078;Harry Potter 8;Fantasía;Robert Zemeckis;10
+PEL-079;Fantastic Beasts 1;Suspenso;Francis Ford Coppola;1
+PEL-080;Fantastic Beasts 2;Aventura;Martin Scorsese;4
+PEL-081;Doctor Strange;Ciencia Ficción;Pixar Studios;8
+PEL-082;Black Panther;Suspenso;Peter Jackson;8
+PEL-083;Thor;Aventura;Ridley Scott;5
+PEL-084;Capitán América;Aventura;Pixar Studios;5
+PEL-085;Ant-Man;Suspenso;Francis Ford Coppola;2
+PEL-086;Guardianes de la Galaxia;Ciencia Ficción;Todd Phillips;7
+PEL-087;Deadpool;Ciencia Ficción;Peter Jackson;3
+PEL-088;Logan;Drama;Ridley Scott;6
+PEL-089;Venom;Fantasía;Christopher Nolan;10
+PEL-090;Morbius;Animación;Disney;7
+PEL-091;La momia;Animación;Quentin Tarantino;2
+PEL-092;El regreso de la momia;Suspenso;Christopher Nolan;9
+PEL-093;El escorpión rey;Romance;Todd Phillips;2
+PEL-094;King Kong;Acción;Ridley Scott;1
+PEL-095;Godzilla;Suspenso;John Lasseter;2
+PEL-096;Pacific Rim;Animación;Disney;9
+PEL-097;Transformers;Ciencia Ficción;Quentin Tarantino;10
+PEL-098;Bumblebee;Animación;Peter Jackson;3
+PEL-099;Megamente;Fantasía;Quentin Tarantino;9
+PEL-100;Los Minions;Aventura;Christopher Nolan;2
