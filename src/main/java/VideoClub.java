@@ -88,7 +88,7 @@ public class VideoClub {
                                c.getApellido() + ";" +
                                c.getTelefono() + ";" +
                                c.getEmail() + ";" +
-                               "premium"; // o c.getTipoCliente() si lo guardaste en la clase Cliente
+                               "premium"; 
                 bw.write(linea);
                 bw.newLine();
             }
@@ -101,15 +101,15 @@ public class VideoClub {
     private void asignarArriendosIniciales() {
         if (clientes.size() < 10 || peliculas.size() < 10) return;
 
-        for (int i = 0; i < 10; i++) { // 10 clientes
+        for (int i = 0; i < 10; i++) {
             Cliente cliente = clientes.get(i);
 
-            for (int j = 0; j < 10; j++) { // 10 arriendos por cliente
-                Pelicula pelicula = peliculas.get(j % peliculas.size()); // para no salir del rango
-                if (!pelicula.arrendar()) continue; // Si no hay stock, saltar
+            for (int j = 0; j < 10; j++) { 
+                Pelicula pelicula = peliculas.get(j % peliculas.size()); 
+                if (!pelicula.arrendar()) continue; 
 
                 String idArriendo = "ARR-" + cliente.getIdCliente() + "-" + pelicula.getIdPelicula();
-                String fechaArriendo = LocalDate.now().minusDays(j).toString(); // fechas diferentes
+                String fechaArriendo = LocalDate.now().minusDays(j).toString();
 
                 Arriendo arriendo = new Arriendo(idArriendo, cliente, pelicula, fechaArriendo);
                 arriendos.add(arriendo);
@@ -280,3 +280,4 @@ public class VideoClub {
         System.out.println("Arriendos: " + videoClub.arriendos.size());
     }
 }
+
