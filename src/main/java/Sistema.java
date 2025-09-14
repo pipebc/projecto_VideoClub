@@ -110,7 +110,8 @@ public class Sistema {
             Pelicula p = a.getPelicula();
             System.out.println("- " + a.getIdArriendo() +
                     " | Película: " + (p != null ? p.getTitulo() : "(desconocida)") +
-                    " | Fecha arriendo: " + a.getFechaArriendo());
+                    " | Fecha arriendo: " + a.getFechaArriendo() +
+                    " | Fecha devolucion: " + a.getFechaDevolucion());
         }
     }
 
@@ -145,6 +146,7 @@ public class Sistema {
                     System.out.println("Cliente agregado");
                     break;
                 }
+
                 case 2: {
                     System.out.print("ID a eliminar: "); String id = lector.readLine();
                     vc.eliminarCliente(id);
@@ -181,7 +183,7 @@ public class Sistema {
                     System.out.print("Director: "); String director = lector.readLine();
                     System.out.print("Stock: "); int stock = Integer.parseInt(lector.readLine());
                     System.out.print("Clasificación: "); String clasif = lector.readLine();
-                    vc.agregarPelicula(new Pelicula(id, titulo, genero, director, stock, clasif));
+                    vc.agregarPelicula(new Pelicula(id, titulo, genero, director, stock));
                     System.out.println("Película agregada");
                     break;
                 }
@@ -212,7 +214,8 @@ public class Sistema {
             System.out.println("2) Eliminar arriendo");
             System.out.println("3) Mostrar arriendos de un cliente");
             System.out.println("4) Devolver arriendo");
-            System.out.println("5) Volver");
+            System.out.println("5) Modificar arriendo");
+            System.out.println("6) Volver");
             System.out.print("Opción: ");
             op = Integer.parseInt(lector.readLine());
             switch (op) {
@@ -227,9 +230,21 @@ public class Sistema {
                     System.out.print("falta "); 
                     break;
                 }
-                case 5: break;
+                case 5:
+                    System.out.print("Ingrese ID del arriendo a modificar: ");
+                    String idArriendo = scanner.nextLine();
+                    System.out.print("Ingrese nueva fecha de devolución (o Enter para dejar igual): ");
+                    String nuevaFecha = scanner.nextLine();
+                    System.out.print("¿Está devuelto? (true/false): ");
+                    boolean devuelto = Boolean.parseBoolean(scanner.nextLine());
+                    System.out.print("Ingrese calificación (0-5): ");
+                    int calificacion = Integer.parseInt(scanner.nextLine());
+                    vc.modificarArriendo(idArriendo, nuevaFecha, devuelto, calificacion);
+                    break;
+
+                case 6: break;
                 default: System.out.println("Opción no válida");
             }
-        } while (op != 5);
+        } while (op != 6);
     }
 }
