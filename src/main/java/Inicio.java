@@ -8,12 +8,12 @@ public class Inicio extends javax.swing.JFrame {
     private VideoClub videoClub;
     
     public Inicio() {
-        videoClub = new VideoClub(); // Carga las películas automáticamente
+        videoClub = new VideoClub();
         initComponents();
     }
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -31,6 +31,12 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem15 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +140,46 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Deudas");
+
+        jMenuItem12.setText("Lista de deudas");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem12);
+
+        jMenuItem13.setText("Lista Negra");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem13);
+
+        jMenuItem14.setText("Pagar Multa");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem14);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Otros");
+
+        jMenuItem15.setText("reporte");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem15);
+
+        jMenuBar1.add(jMenu5);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -144,13 +190,13 @@ public class Inicio extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGap(0, 358, Short.MAX_VALUE)
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         JTextField idField = new JTextField();
         JTextField titleField = new JTextField();
         JTextField genreField = new JTextField();
@@ -182,9 +228,9 @@ public class Inicio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error al agregar película: " + e.getMessage());
             }
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }                                          
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         List<Pelicula> peliculas = videoClub.getPeliculas();
         StringBuilder sb = new StringBuilder("Películas:\n");
         for (Pelicula p : peliculas) {
@@ -195,9 +241,9 @@ public class Inicio extends javax.swing.JFrame {
               .append(p.getStock()).append("\n");
         }
         JOptionPane.showMessageDialog(this, sb.toString());
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }                                          
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String id = JOptionPane.showInputDialog(this, "Ingrese el ID de la película a eliminar:");
         if (id != null && !id.trim().isEmpty()) {
             if (videoClub.eliminarPelicula(id.trim())) {
@@ -206,9 +252,9 @@ public class Inicio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No se encontró la película.");
             }
         }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }                                          
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         JTextField idField = new JTextField();
         JTextField nombreField = new JTextField();
         JTextField apellidoField = new JTextField();
@@ -240,16 +286,16 @@ public class Inicio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error al registrar cliente: " + e.getMessage());
             }
         }
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }                                          
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String id = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente a eliminar:");
         if (id != null && !id.trim().isEmpty()) {
             videoClub.eliminarCliente(id.trim());
         }
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }                                          
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         List<Cliente> clientes = videoClub.getClientes();
         StringBuilder sb = new StringBuilder("Clientes:\n");
         for (Cliente c : clientes) {
@@ -258,9 +304,9 @@ public class Inicio extends javax.swing.JFrame {
               .append(c.getApellido()).append("\n");
         }
         JOptionPane.showMessageDialog(this, sb.toString());
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }                                          
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String id = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:");
         Cliente c = videoClub.buscarCliente(id);
         if (c != null) {
@@ -272,9 +318,9 @@ public class Inicio extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Cliente no encontrado.");
         }
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }                                          
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String idCliente = JOptionPane.showInputDialog(this, "ID del Cliente:");
         Cliente cliente = videoClub.buscarCliente(idCliente);
         if (cliente == null) {
@@ -282,6 +328,14 @@ public class Inicio extends javax.swing.JFrame {
             return;
         }
 
+        if (cliente instanceof DeudaCliente) {
+            if (!((DeudaCliente)cliente).puedeArrendar()) {
+                JOptionPane.showMessageDialog(this, "El cliente no puede arrendar por deuda o bloqueo.");
+                return;
+            }
+        }
+
+        
         String idPelicula = JOptionPane.showInputDialog(this, "ID de la Película:");
         Pelicula pelicula = videoClub.buscarPelicula(idPelicula);
         if (pelicula == null) {
@@ -305,16 +359,16 @@ public class Inicio extends javax.swing.JFrame {
                 "\nCliente: " + cliente.getIdCliente() +
                 "\nPelícula: " + pelicula.getTitulo() +
                 "\nFecha: " + fechaArriendo);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }                                          
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String idArriendo = JOptionPane.showInputDialog(this, "ID del arriendo a eliminar:");
         if (idArriendo != null && !idArriendo.trim().isEmpty()) {
             videoClub.eliminarArriendo(idArriendo.trim());
         }
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }                                          
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         String idCliente = JOptionPane.showInputDialog(this, "ID del Cliente:");
         Cliente cliente = videoClub.buscarCliente(idCliente);
         if (cliente == null) {
@@ -338,9 +392,9 @@ public class Inicio extends javax.swing.JFrame {
                 .append("\n");
         }
         JOptionPane.showMessageDialog(this, sb.toString());
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }                                           
 
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         String idArriendo = JOptionPane.showInputDialog(this, "ID del arriendo a devolver:");
         Arriendo arriendo = videoClub.buscarArriendo(idArriendo);
         if (arriendo != null && !arriendo.isDevuelto()) {
@@ -350,7 +404,38 @@ public class Inicio extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Arriendo no encontrado o ya devuelto.");
         }
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
+    }                                           
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        List<String> deudores = videoClub.listarClientesConDeuda();
+        if (deudores.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay clientes con deuda.");
+        } else {
+            StringBuilder sb = new StringBuilder("Clientes con deuda:\n");
+            for (String s : deudores) sb.append(s).append("\n");
+            JOptionPane.showMessageDialog(this, sb.toString());
+        }
+    }                                           
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        List<String> listaNegra = videoClub.listarClientesEnListaNegra();
+        if (listaNegra.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay clientes en la lista negra.");
+        } else {
+            StringBuilder sb = new StringBuilder("Clientes en lista negra:\n");
+            for (String s : listaNegra) sb.append(s).append("\n");
+            JOptionPane.showMessageDialog(this, sb.toString());
+        }
+    }                                           
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        
+    }                                           
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        String reporte = videoClub.generarReporteCompleto();
+        JOptionPane.showMessageDialog(this, reporte);
+    }                                           
 
     /**
      * @param args the command line arguments
@@ -388,14 +473,20 @@ public class Inicio extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -404,5 +495,5 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
