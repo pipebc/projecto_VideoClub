@@ -1,4 +1,3 @@
-
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -37,8 +36,8 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
@@ -188,14 +187,6 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem12);
 
-        jMenuItem13.setText("Lista Negra");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem13);
-
         jMenuItem14.setText("Pagar Multa");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +194,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem14);
+
+        jMenuItem17.setText("Agregar deuda");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem17);
 
         jMenuBar1.add(jMenu4);
 
@@ -463,17 +462,6 @@ public class Inicio extends javax.swing.JFrame {
         }
     }                                           
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        List<String> listaNegra = videoClub.listarClientesEnListaNegra();
-        if (listaNegra.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay clientes en la lista negra.");
-        } else {
-            StringBuilder sb = new StringBuilder("Clientes en lista negra:\n");
-            for (String s : listaNegra) sb.append(s).append("\n");
-            JOptionPane.showMessageDialog(this, sb.toString());
-        }
-    }                                           
-
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         String id = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:");
         if (id == null || id.trim().isEmpty()) return;
@@ -581,6 +569,32 @@ public class Inicio extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, pr.toString());
     }                                           
 
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        String id = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:");
+        if (id == null || id.trim().isEmpty()) return;
+
+        String montoStr = JOptionPane.showInputDialog(this, "Ingrese el monto de la multa:");
+        if (montoStr == null) return;
+
+        double monto;
+        try {
+            monto = Double.parseDouble(montoStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Monto inválido.");
+            return;
+        }
+
+        String motivo = JOptionPane.showInputDialog(this, "Ingrese el motivo de la multa:");
+        if (motivo == null || motivo.trim().isEmpty()) return;
+
+        boolean exito = videoClub.agregarMultaCliente(id.trim(), monto, motivo);
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "Multa agregada correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo agregar la multa.");
+        }
+    }                                           
+
     /**
      * @param args the command line arguments
      */
@@ -629,10 +643,10 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
