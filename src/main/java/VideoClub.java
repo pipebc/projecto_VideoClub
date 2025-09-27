@@ -31,7 +31,7 @@ public class VideoClub {
                     String genero = datos[2].trim();
                     String director = datos[3].trim();
                     int stock = Integer.parseInt(datos[4].trim());
-                    Pelicula pelicula = new Pelicula(id, titulo, genero, director, stock);
+                    Pelicula pelicula = new PeliculaRecomendada(id, titulo, genero, director, stock, "");
                     peliculas.add(pelicula);
                 }
             }
@@ -145,6 +145,19 @@ public class VideoClub {
                 p.getTitulo().equalsIgnoreCase(pelicula.getTitulo())) {
                 return false;
             }
+        }
+        Pelicula nueva;
+        if (pelicula instanceof PeliculaRecomendada) {
+            nueva = pelicula;
+        } else {
+            nueva = new PeliculaRecomendada(
+                pelicula.getIdPelicula(),
+                pelicula.getTitulo(),
+                pelicula.getGenero(),
+                pelicula.getDirector(),
+                pelicula.getStock(),
+                ""
+            );
         }
         peliculas.add(pelicula);
         guardarPeliculasEnArchivo("100peliculas.txt");
@@ -439,6 +452,39 @@ public class VideoClub {
             }
         }
     }
+    
+    public boolean agregarMultaCliente(String idCliente, double monto, String motivo) {
+        Cliente cliente = buscarCliente(idCliente);
+        if (cliente == null) {
+            System.out.println("Cliente no encontrado: " + idCliente);
+            return false;
+        }
+
+        if (!(cliente instanceof DeudaCliente)) {
+            System.out.println("El cliente no es de tipo DeudaCliente: " + idCliente);
+            return false;
+        }
+
+        DeudaCliente deudaCliente = (DeudaCliente) cliente;
+
+        if (monto <= 0) {
+            System.out.println("El monto de la multa debe ser mayor a 0");
+            return false;
+        }
+
+        deudaCliente.agregarMulta(monto);
+
+        double multaActual = multasClientes.getOrDefault(idCliente, 0.0);
+        multasClientes.put(idCliente, multaActual + monto);
+
+        System.out.println("Multa agregada exitosamente:");
+        System.out.println("Cliente: " + cliente.getNombre() + " " + cliente.getApellido());
+        System.out.println("Monto: $" + monto);
+        System.out.println("Motivo: " + motivo);
+        System.out.println("Deuda total: $" + deudaCliente.getMontoTotalMulta());
+
+        return true;
+    }       
     
     public static void main(String[] args) throws IOException {
         VideoClub videoClub = new VideoClub();
