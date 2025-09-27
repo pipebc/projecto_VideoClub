@@ -412,7 +412,34 @@ public class VideoClub {
         System.out.println("Cantidad arrendada: " + arrendadas);
         System.out.println("Cantidad disponible: " + disponibles);
     }
-
+    
+    public String pagarDeudaCliente(String idCliente, double monto) {
+        Cliente c = buscarCliente(idCliente);
+        if (c == null) {
+            return "Cliente no encontrado.";
+        }
+        if (!(c instanceof DeudaCliente)) {
+            return "El cliente no tiene sistema de multas (no es DeudaCliente).";
+        }
+        DeudaCliente dc = (DeudaCliente) c;
+        double deuda = dc.getMontoTotalMulta();
+        if (deuda <= 0) {
+            return "El cliente no tiene deudas pendientes.";
+        }
+        if (monto <= 0) {
+            dc.pagarMultaCompleta();
+            return "Deuda saldada completamente.";
+        } else {
+            if (monto > deuda) {
+                dc.pagarMulta(deuda);
+                return "Pago realizado. Deuda saldada completamente.";
+            } else {
+                dc.pagarMulta(monto);
+                return "Pago realizado. Multa restante: $" + dc.getMontoTotalMulta();
+            }
+        }
+    }
+    
     public static void main(String[] args) throws IOException {
         VideoClub videoClub = new VideoClub();
         System.out.println("Datos iniciales cargados correctamente!");
