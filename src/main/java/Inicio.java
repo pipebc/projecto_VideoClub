@@ -26,6 +26,10 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem20 = new javax.swing.JMenuItem();
+        jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -37,6 +41,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,6 +108,39 @@ public class Inicio extends javax.swing.JFrame {
         jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu6.setText("Recomendaciones");
+        jMenu6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu6ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem20.setText("Registrar recomendacion");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem20);
+
+        jMenuItem21.setText("Registrar feedback de cliente");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem21);
+
+        jMenuItem22.setText("Ver detalles recomendacion");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem22);
+
+        jMenuBar1.add(jMenu6);
 
         jMenu3.setText("Arriendos");
 
@@ -177,6 +215,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem15);
+
+        jMenuItem16.setText("Funcion sia2.5");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem16);
 
         jMenuBar1.add(jMenu5);
 
@@ -429,12 +475,110 @@ public class Inicio extends javax.swing.JFrame {
     }                                           
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        
+        String id = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:");
+        if (id == null || id.trim().isEmpty()) return;
+        Cliente c = videoClub.buscarCliente(id);
+        if (c == null || !(c instanceof DeudaCliente)) {
+            String msg = videoClub.pagarDeudaCliente(id, 1);
+            JOptionPane.showMessageDialog(this, msg);
+            return;
+        }
+        DeudaCliente dc = (DeudaCliente) c;
+        double deuda = dc.getMontoTotalMulta();
+        if (deuda <= 0) {
+            JOptionPane.showMessageDialog(this, "El cliente no tiene deudas pendientes.");
+            return;
+        }
+        String[] opciones = {"Pagar parcial", "Pagar todo", "Cancelar"};
+        int respuesta = JOptionPane.showOptionDialog(this,
+                "La deuda actual del cliente es: $" + deuda + "\n¿Desea pagar un monto parcial o toda la deuda?",
+                "Pago de Deuda",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, opciones, opciones[0]);
+        if (respuesta == 0) { 
+            String montoStr = JOptionPane.showInputDialog(this, "Ingrese el monto a pagar:");
+            if (montoStr == null) return;
+            try {
+                double monto = Double.parseDouble(montoStr);
+                if (monto <= 0) throw new NumberFormatException();
+                String msg = videoClub.pagarDeudaCliente(id, monto);
+                JOptionPane.showMessageDialog(this, msg);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Monto inválido.");
+            }
+        } else if (respuesta == 1) {
+            String msg = videoClub.pagarDeudaCliente(id, 0);
+            JOptionPane.showMessageDialog(this, msg);
+        }
     }                                           
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         String reporte = videoClub.generarReporteCompleto();
         JOptionPane.showMessageDialog(this, reporte);
+    }                                           
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        int arrendadas = 0;
+        int disponibles = 0;
+        for (Pelicula pelicula : videoClub.getPeliculas()) {
+            if (pelicula.getTitulo().toLowerCase().contains("harry potter")) {
+                arrendadas += pelicula.getVecesArrendada();
+                disponibles += pelicula.getStock();
+            }
+        }
+        String mensaje = "=== Estado de películas de Harry Potter ===\n"
+                       + "Cantidad arrendada: " + arrendadas + "\n"
+                       + "Cantidad disponible: " + disponibles;
+        JOptionPane.showMessageDialog(this, mensaje, "Estado Harry Potter", JOptionPane.INFORMATION_MESSAGE);
+    }                                           
+
+    private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        String id = JOptionPane.showInputDialog(this, "Ingrese el ID de la película recomendada:");
+        Pelicula p = videoClub.buscarPelicula(id);
+        if (!(p instanceof PeliculaRecomendada)) {
+            JOptionPane.showMessageDialog(this, "La película no es del tipo recomendada.");
+            return;
+        }
+        PeliculaRecomendada pr = (PeliculaRecomendada) p;
+        pr.registrarRecomendacion();
+        JOptionPane.showMessageDialog(this, "¡Recomendación registrada!\nVeces recomendada: " + pr.getVecesRecomendada());
+    }                                           
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        String idPelicula = JOptionPane.showInputDialog(this, "Ingrese el ID de la película recomendada:");
+        Pelicula p = videoClub.buscarPelicula(idPelicula);
+        if (!(p instanceof PeliculaRecomendada)) {
+            JOptionPane.showMessageDialog(this, "La película no es del tipo recomendada.");
+            return;
+        }
+        PeliculaRecomendada pr = (PeliculaRecomendada) p;
+        String idCliente = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente que da feedback:");
+        String[] opciones = {"Sí, le gustó", "No le gustó"};
+        int res = JOptionPane.showOptionDialog(this, "¿Le gustó la recomendación al cliente?", "Feedback",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+        if (res == 0) {
+            pr.registrarFeedback(idCliente, true);
+            JOptionPane.showMessageDialog(this, "¡Feedback positivo registrado!");
+        } else if (res == 1) {
+            pr.registrarFeedback(idCliente, false);
+            JOptionPane.showMessageDialog(this, "Feedback negativo registrado.");
+        }
+    }                                           
+
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        String id = JOptionPane.showInputDialog(this, "Ingrese el ID de la película recomendada:");
+        Pelicula p = videoClub.buscarPelicula(id);
+        if (!(p instanceof PeliculaRecomendada)) {
+            JOptionPane.showMessageDialog(this, "La película no es del tipo recomendada.");
+            return;
+        }
+        PeliculaRecomendada pr = (PeliculaRecomendada) p;
+        JOptionPane.showMessageDialog(this, pr.toString());
     }                                           
 
     /**
@@ -479,6 +623,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -487,7 +632,11 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem21;
+    private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
